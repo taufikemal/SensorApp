@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     protected void onStart() {
         super.onStart();
         if(sensorProximity != null){
-            sensorManager.registerListener(this, sensorProximity,
+            sensorManager.registerListener(this, sensorAccelerometer,
                     SensorManager.SENSOR_DELAY_NORMAL);
         }
 
@@ -76,12 +76,10 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
     public void onSensorChanged(SensorEvent sensorEvent) {
         int sensorType = sensorEvent.sensor.getType();
         float value = sensorEvent.values[0];
-        if(sensorType == Sensor.TYPE_ACCELEROMETER){
-            sensorProximityText.setText(String.format("Accelerometer Sensor: %1$.2f", value));
-        }
-
-        if(sensorType == Sensor.TYPE_PROXIMITY){
-            sensorProximityText.setText(String.format("Proximity Sensor: %1$.2f", value));
+        if (sensorType == Sensor.TYPE_ACCELEROMETER){
+            sensorAccelerometerText.setText(String.format("Accelerometer sensor: %1$.2f", value));
+        } else if (sensorType == Sensor.TYPE_PROXIMITY){
+            sensorProximityText.setText(String.format("Proximity sensor: %1$.2f", value));
         }
     }
 
